@@ -4,6 +4,7 @@ use_frameworks!
 target 'FlickrGallery' do
 pod 'FlickrKit'
 pod 'SDWebImage', '~>3.7'
+pod 'MBProgressHUD', '~> 0.9.1'
 end
 
 target 'FlickrGalleryTests' do

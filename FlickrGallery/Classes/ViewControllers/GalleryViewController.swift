@@ -9,6 +9,7 @@
 import UIKit
 import FlickrKit
 import SDWebImage
+import MBProgressHUD
 
 class GalleryViewController : UICollectionViewController {
     
@@ -25,6 +26,9 @@ class GalleryViewController : UICollectionViewController {
     }
     
     func fetchPhotos() {
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Loading..."
+        
         let flickrKit = FlickrKit.sharedFlickrKit()
         flickrKit.call(FKFlickrInterestingnessGetList()) { (response, error) -> Void in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -44,6 +48,7 @@ class GalleryViewController : UICollectionViewController {
                     self.presentViewController(alertController, animated: true, completion: nil)
                 }
                 
+                hud.hide(true)
                 self.collectionView?.reloadData()
                 self.refreshControl.endRefreshing()
             })
