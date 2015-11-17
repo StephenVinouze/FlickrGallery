@@ -29,8 +29,13 @@ class GalleryViewController : UICollectionViewController {
         let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.labelText = NSLocalizedString("LoadingPhotos", comment: "")
         
+        let photoSearch = FKFlickrPhotosSearch()
+        photoSearch.accuracy = "11"
+        photoSearch.lat = "44.8404400"
+        photoSearch.lon = "-0.5805000"
+        
         let flickrKit = FlickrKit.sharedFlickrKit()
-        flickrKit.call(FKFlickrInterestingnessGetList()) { (response, error) -> Void in
+        flickrKit.call(photoSearch) { (response, error) -> Void in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 
                 if (response != nil) {
