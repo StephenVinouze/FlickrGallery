@@ -8,15 +8,18 @@
 
 import UIKit
 import CoreData
+import FlickrKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    private let kFlickrApiKey = "035a49b6782ea1221be5cd6eecca4730"
+    private let kFlickrApiSecret = "5a1cde0b4d0a7c96"
     var window: UIWindow?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        FlickrKit.sharedFlickrKit().initializeWithAPIKey(kFlickrApiKey, sharedSecret: kFlickrApiSecret)
         return true
     }
 

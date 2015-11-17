@@ -12,15 +12,20 @@ import SDWebImage
 
 class GalleryViewController : UICollectionViewController {
     
-    private let kFlickrApiKey = "035a49b6782ea1221be5cd6eecca4730"
-    private let kFlickrApiSecret = "5a1cde0b4d0a7c96"
+    private let refreshControl = UIRefreshControl()
     private var photos = [NSURL]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        refreshControl.addTarget(self, action: "onRefresh", forControlEvents: .ValueChanged)
+        collectionView?.addSubview(refreshControl)
+        
+        fetchPhotos()
+    }
+    
+    func fetchPhotos() {
         let flickrKit = FlickrKit.sharedFlickrKit()
-        flickrKit.initializeWithAPIKey(kFlickrApiKey, sharedSecret: kFlickrApiSecret)
         flickrKit.call(FKFlickrInterestingnessGetList()) { (response, error) -> Void in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 
@@ -31,23 +36,22 @@ class GalleryViewController : UICollectionViewController {
                         let photoURL = flickrKit.photoURLForSize(FKPhotoSizeSmall240, fromPhotoDictionary: photoDictionary)
                         self.photos.append(photoURL)
                     }
-                    self.collectionView?.reloadData()
                 }
                 else {
-                    switch error.code {
-                    case FKFlickrInterestingnessGetListError.ServiceCurrentlyUnavailable.rawValue:
-                        break;
-                    default:
-                        break;
-                    }
-                    
                     let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .Alert)
                     alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
                     
                     self.presentViewController(alertController, animated: true, completion: nil)
                 }
+                
+                self.collectionView?.reloadData()
+                self.refreshControl.endRefreshing()
             })
         }
+    }
+    
+    func onRefresh() {
+        fetchPhotos()
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
