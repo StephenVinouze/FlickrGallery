@@ -27,7 +27,7 @@ class GalleryViewController : UICollectionViewController {
     
     func fetchPhotos() {
         let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        hud.labelText = "Loading..."
+        hud.labelText = NSLocalizedString("LoadingPhotos", comment: "")
         
         let flickrKit = FlickrKit.sharedFlickrKit()
         flickrKit.call(FKFlickrInterestingnessGetList()) { (response, error) -> Void in
