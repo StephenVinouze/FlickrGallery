@@ -1,0 +1,10 @@
+PODS:
+  - FlickrKit (1.0.7)
+
+DEPENDENCIES:
+  - FlickrKit
+
+SPEC CHECKSUMS:
+  FlickrKit: 907da468d679233a27d66dd88c6dcd024074b0f0
+
+COCOAPODS: 0.39.0
