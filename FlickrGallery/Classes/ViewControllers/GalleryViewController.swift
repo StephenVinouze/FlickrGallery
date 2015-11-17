@@ -32,7 +32,8 @@ class GalleryViewController : UICollectionViewController {
                         self.photos.append(photoURL)
                     }
                     self.collectionView?.reloadData()
-                } else {
+                }
+                else {
                     switch error.code {
                     case FKFlickrInterestingnessGetListError.ServiceCurrentlyUnavailable.rawValue:
                         break;
@@ -40,7 +41,10 @@ class GalleryViewController : UICollectionViewController {
                         break;
                     }
                     
-                    UIAlertView(title: "Error", message: error.localizedDescription, delegate: nil, cancelButtonTitle: "OK").show()
+                    let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .Alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
                 }
             })
         }
