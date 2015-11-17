@@ -8,6 +8,7 @@
 
 import UIKit
 import FlickrKit
+import SDWebImage
 
 class GalleryViewController : UICollectionViewController {
     
@@ -52,11 +53,7 @@ class GalleryViewController : UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("gallery_cell_identifier", forIndexPath: indexPath) as! GalleryCell
         cell.backgroundColor = UIColor.blackColor()
-        
-        let urlRequest = NSURLRequest(URL: photos[indexPath.row])
-        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue(), completionHandler: { (response, data, error) -> Void in
-            cell.photo.image = UIImage(data: data!)
-        })
+        cell.photo.sd_setImageWithURL(photos[indexPath.row])
         
         return cell
     }
