@@ -16,23 +16,36 @@ class GalleryViewController : UICollectionViewController {
     private let refreshControl = UIRefreshControl()
     private var photos = [NSURL]()
     
+    deinit {
+        KBLocationProvider.instance().stopFetchLocation()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         refreshControl.addTarget(self, action: "onRefresh", forControlEvents: .ValueChanged)
         collectionView?.addSubview(refreshControl)
         
-        fetchPhotos()
+        KBLocationProvider.instance().startFetchLocation(kCLLocationAccuracyHundredMeters) { (location, error) -> Void in
+            if error == nil {
+                self.fetchPhotos(location)
+            }
+            else {
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.showAlertError("Pas de loc")
+                })
+            }
+        }
     }
     
-    func fetchPhotos() {
+    func fetchPhotos(location : CLLocation!) {
         let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.labelText = NSLocalizedString("LoadingPhotos", comment: "")
         
         let photoSearch = FKFlickrPhotosSearch()
-        photoSearch.accuracy = "11"
-        photoSearch.lat = "44.8404400"
-        photoSearch.lon = "-0.5805000"
+        photoSearch.accuracy = String(11) // Accuracy set to a city level
+        photoSearch.lat = String(location.coordinate.latitude)
+        photoSearch.lon = String(location.coordinate.longitude)
         
         let flickrKit = FlickrKit.sharedFlickrKit()
         flickrKit.call(photoSearch) { (response, error) -> Void in
@@ -47,10 +60,7 @@ class GalleryViewController : UICollectionViewController {
                     }
                 }
                 else {
-                    let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .Alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    
-                    self.presentViewController(alertController, animated: true, completion: nil)
+                    self.showAlertError(error.localizedDescription)
                 }
                 
                 hud.hide(true)
@@ -60,8 +70,15 @@ class GalleryViewController : UICollectionViewController {
         }
     }
     
+    func showAlertError(message : String!) {
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
     func onRefresh() {
-        fetchPhotos()
+        fetchPhotos(KBLocationProvider.lastLocation())
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
