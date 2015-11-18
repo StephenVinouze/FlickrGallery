@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 import FlickrKit
 import SDWebImage
 import MBProgressHUD
@@ -17,6 +18,7 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
     private let refreshControl = UIRefreshControl()
     private let transitionDelegate = GalleryTransitionDelegate()
     private var isLoading = false
+    private var lastLocation : CLLocation?
     
     typealias Photo = (thumbnailImageUrl: NSURL, zoomImageUrl: NSURL?)
     
@@ -45,7 +47,12 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
         KBLocationProvider.instance().startFetchLocation { (location, error) -> Void in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 if location != nil {
-                    self.fetchPhotos(location)
+                    
+                    if self.lastLocation == nil || location.distanceFromLocation(self.lastLocation!) > 10 {
+                        self.fetchPhotos(location)
+                    }
+                    
+                    self.lastLocation = location
                 }
                 else {
                     self.showAlertError(error.localizedDescription)

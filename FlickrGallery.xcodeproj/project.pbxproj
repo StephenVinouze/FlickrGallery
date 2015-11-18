@@ -87,6 +87,7 @@
 		7616841F1BFBEFEC00000D6C /* KBLocationProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBLocationProvider.h; sourceTree = "<group>"; };
 		761684201BFBEFEC00000D6C /* KBLocationProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KBLocationProvider.m; sourceTree = "<group>"; };
 		761684271BFBF19B00000D6C /* FlickrGallery-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlickrGallery-Bridging-Header.h"; sourceTree = "<group>"; };
+		766F76E01BFD144C00BA273B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		76A5775E1BFC8E250026D363 /* PinchLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PinchLayout.h; path = "../../../../../../../Downloads/UICollectionView-Demo-master/CollectionViewTest/CollectionViewTest/PinchLayout.h"; sourceTree = "<group>"; };
 		76A5775F1BFC8E250026D363 /* PinchLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PinchLayout.m; path = "../../../../../../../Downloads/UICollectionView-Demo-master/CollectionViewTest/CollectionViewTest/PinchLayout.m"; sourceTree = "<group>"; };
 		76A5776C1BFCB1B70026D363 /* ZoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +128,7 @@
 		2B574E32D973048F0BF8988B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				766F76E01BFD144C00BA273B /* CoreLocation.framework */,
 				9F993757681A8C08B8312D5C /* Pods_FlickrGallery.framework */,
 			);
 			name = Frameworks;
