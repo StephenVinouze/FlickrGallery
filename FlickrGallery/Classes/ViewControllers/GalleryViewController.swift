@@ -61,7 +61,7 @@ class GalleryViewController : UICollectionViewController {
                         let topPhotos = response["photos"] as! [NSObject: AnyObject]
                         let photoArray = topPhotos["photo"] as! [[NSObject: AnyObject]]
                         for photoDictionary in photoArray {
-                            let photoURL = flickrKit.photoURLForSize(FKPhotoSizeSmall240, fromPhotoDictionary: photoDictionary)
+                            let photoURL = flickrKit.photoURLForSize(FKPhotoSizeLargeSquare150, fromPhotoDictionary: photoDictionary)
                             self.photos.append(photoURL)
                         }
                     }
