@@ -17,7 +17,9 @@ typedef void (^KBLocationCallback)(CLLocation *location, NSError *error);
 + (CLLocation *)lastLocation;
 + (void)reverseLocation:(CLGeocodeCompletionHandler)completionHandler;
 
+- (void)startFetchLocation:(KBLocationCallback)completion;
 - (void)startFetchLocation:(CLLocationAccuracy)accuracy completion:(KBLocationCallback)completion;
+- (void)startFetchLocation:(CLLocationAccuracy)accuracy distance:(CLLocationDistance)distance completion:(KBLocationCallback)completion;
 - (void)stopFetchLocation;
 
 @end

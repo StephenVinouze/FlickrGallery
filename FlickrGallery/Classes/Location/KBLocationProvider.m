@@ -45,7 +45,17 @@ static KBLocationProvider *kSingleton;
     }
 }
 
-- (void)startFetchLocation:(CLLocationAccuracy)accuracy completion:(KBLocationCallback)completion
+- (void)startFetchLocation:(KBLocationCallback)completion
+{
+    [self startFetchLocation:kCLLocationAccuracyNearestTenMeters completion:completion];
+}
+
+- (void)startFetchLocation:(CLLocationAccuracy)accuracy completion:(KBLocationCallback)completion {
+    [self startFetchLocation:accuracy distance:10 completion:completion];
+}
+
+
+- (void)startFetchLocation:(CLLocationAccuracy)accuracy distance:(CLLocationDistance)distance completion:(KBLocationCallback)completion
 {
     _callback = completion;
     
@@ -55,6 +65,7 @@ static KBLocationProvider *kSingleton;
     }
     
     [_locationManager setDesiredAccuracy:accuracy];
+    [_locationManager setDistanceFilter:distance];
     [_locationManager setDelegate:self];
     [_locationManager startUpdatingLocation];
 }

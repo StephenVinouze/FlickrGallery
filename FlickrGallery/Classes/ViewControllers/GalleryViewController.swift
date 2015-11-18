@@ -14,6 +14,7 @@ import MBProgressHUD
 class GalleryViewController : UICollectionViewController {
     
     private let refreshControl = UIRefreshControl()
+    private var isLoading = false
     private var photos = [NSURL]()
     
     deinit {
@@ -26,49 +27,54 @@ class GalleryViewController : UICollectionViewController {
         refreshControl.addTarget(self, action: "onRefresh", forControlEvents: .ValueChanged)
         collectionView?.addSubview(refreshControl)
         
-        KBLocationProvider.instance().startFetchLocation(kCLLocationAccuracyHundredMeters) { (location, error) -> Void in
-            if error == nil {
-                self.fetchPhotos(location)
-            }
-            else {
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        KBLocationProvider.instance().startFetchLocation { (location, error) -> Void in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                if error == nil {
+                    self.fetchPhotos(location)
+                }
+                else {
                     self.showAlertError("Pas de loc")
-                })
-            }
+                }
+            })
         }
     }
     
     func fetchPhotos(location : CLLocation!) {
-        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        hud.labelText = NSLocalizedString("LoadingPhotos", comment: "")
-        
-        let photoSearch = FKFlickrPhotosSearch()
-        photoSearch.accuracy = String(11) // Accuracy set to a city level
-        photoSearch.lat = String(location.coordinate.latitude)
-        photoSearch.lon = String(location.coordinate.longitude)
-        
-        let flickrKit = FlickrKit.sharedFlickrKit()
-        flickrKit.call(photoSearch) { (response, error) -> Void in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                
-                if (response != nil) {
-                    self.photos.removeAll()
+        if !isLoading {
+            isLoading = true;
+            
+            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            hud.labelText = NSLocalizedString("LoadingPhotos", comment: "")
+            
+            let photoSearch = FKFlickrPhotosSearch()
+            photoSearch.accuracy = String(11) // Accuracy set to a city level
+            photoSearch.lat = String(location.coordinate.latitude)
+            photoSearch.lon = String(location.coordinate.longitude)
+            
+            let flickrKit = FlickrKit.sharedFlickrKit()
+            flickrKit.call(photoSearch) { (response, error) -> Void in
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     
-                    let topPhotos = response["photos"] as! [NSObject: AnyObject]
-                    let photoArray = topPhotos["photo"] as! [[NSObject: AnyObject]]
-                    for photoDictionary in photoArray {
-                        let photoURL = flickrKit.photoURLForSize(FKPhotoSizeSmall240, fromPhotoDictionary: photoDictionary)
-                        self.photos.append(photoURL)
+                    if (response != nil) {
+                        self.photos.removeAll()
+                        
+                        let topPhotos = response["photos"] as! [NSObject: AnyObject]
+                        let photoArray = topPhotos["photo"] as! [[NSObject: AnyObject]]
+                        for photoDictionary in photoArray {
+                            let photoURL = flickrKit.photoURLForSize(FKPhotoSizeSmall240, fromPhotoDictionary: photoDictionary)
+                            self.photos.append(photoURL)
+                        }
                     }
-                }
-                else {
-                    self.showAlertError(error.localizedDescription)
-                }
-                
-                hud.hide(true)
-                self.collectionView?.reloadData()
-                self.refreshControl.endRefreshing()
-            })
+                    else {
+                        self.showAlertError(error.localizedDescription)
+                    }
+                    
+                    hud.hide(true)
+                    self.collectionView?.reloadData()
+                    self.refreshControl.endRefreshing()
+                    self.isLoading = false
+                })
+            }
         }
     }
     
