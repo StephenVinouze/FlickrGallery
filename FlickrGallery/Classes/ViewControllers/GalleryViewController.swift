@@ -109,48 +109,43 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
+    func handleGesture(gesture: UIGestureRecognizer) {
+        let pinchLayout = collectionView?.collectionViewLayout as! PinchLayout
+        
+        if gesture.state == .Began {
+            let initialPoint = gesture.locationInView(collectionView)
+            pinchLayout.pinchedCellPath = collectionView?.indexPathForItemAtPoint(initialPoint)
+        }
+        else if gesture.state == .Changed {
+            pinchLayout.pinchedCellCenter = gesture.locationInView(collectionView)
+            
+            if let pinchGesture = gesture as? UIPinchGestureRecognizer {
+                pinchLayout.pinchedCellScale = pinchGesture.scale
+            }
+            else if let rotationGesture = gesture as? UIRotationGestureRecognizer {
+                pinchLayout.pinchedCellRotationAngle = rotationGesture.rotation
+            }
+        }
+        else {
+            collectionView?.performBatchUpdates({ () -> Void in
+                pinchLayout.pinchedCellPath = nil;
+                pinchLayout.pinchedCellScale = 1.0;
+                pinchLayout.pinchedCellRotationAngle = 0.0;
+                }, completion: nil)
+        }
+    }
+    
+    
+    func onPinch(gesture : UIPinchGestureRecognizer) {
+        handleGesture(gesture)
+    }
+    
+    func onRotate(gesture : UIRotationGestureRecognizer) {
+        handleGesture(gesture)
+    }
+    
     func onRefresh() {
         fetchPhotos(KBLocationProvider.lastLocation())
-    }
-    
-    func onPinch(sender : UIPinchGestureRecognizer) {
-        let pinchLayout = collectionView?.collectionViewLayout as! PinchLayout
-        
-        if sender.state == .Began {
-            let initialPoint = sender.locationInView(collectionView)
-            pinchLayout.pinchedCellPath = collectionView?.indexPathForItemAtPoint(initialPoint)
-        }
-        else if sender.state == .Changed {
-            pinchLayout.pinchedCellScale = sender.scale
-            pinchLayout.pinchedCellCenter = sender.locationInView(collectionView)
-        }
-        else {
-            collectionView?.performBatchUpdates({ () -> Void in
-                pinchLayout.pinchedCellPath = nil;
-                pinchLayout.pinchedCellScale = 1.0;
-                pinchLayout.pinchedCellRotationAngle = 0.0;
-                }, completion: nil)
-        }
-    }
-    
-    func onRotate(sender : UIRotationGestureRecognizer) {
-        let pinchLayout = collectionView?.collectionViewLayout as! PinchLayout
-        
-        if sender.state == .Began {
-            let initialPoint = sender.locationInView(collectionView)
-            pinchLayout.pinchedCellPath = collectionView?.indexPathForItemAtPoint(initialPoint)
-        }
-        else if sender.state == .Changed {
-            pinchLayout.pinchedCellRotationAngle = sender.rotation
-            pinchLayout.pinchedCellCenter = sender.locationInView(collectionView)
-        }
-        else {
-            collectionView?.performBatchUpdates({ () -> Void in
-                pinchLayout.pinchedCellPath = nil;
-                pinchLayout.pinchedCellScale = 1.0;
-                pinchLayout.pinchedCellRotationAngle = 0.0;
-                }, completion: nil)
-        }
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
