@@ -29,6 +29,9 @@
 		761684211BFBEFEC00000D6C /* KBLocationProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 761684201BFBEFEC00000D6C /* KBLocationProvider.m */; };
 		761684221BFBEFEC00000D6C /* KBLocationProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 761684201BFBEFEC00000D6C /* KBLocationProvider.m */; };
 		761684231BFBEFEC00000D6C /* KBLocationProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 761684201BFBEFEC00000D6C /* KBLocationProvider.m */; };
+		76A577621BFC8E250026D363 /* PinchLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A5775F1BFC8E250026D363 /* PinchLayout.m */; };
+		76A577631BFC8E250026D363 /* PinchLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A5775F1BFC8E250026D363 /* PinchLayout.m */; };
+		76A577641BFC8E250026D363 /* PinchLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A5775F1BFC8E250026D363 /* PinchLayout.m */; };
 		C1B2E72A7C5F0740751D6EE7 /* Pods_FlickrGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F993757681A8C08B8312D5C /* Pods_FlickrGallery.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +74,8 @@
 		7616841F1BFBEFEC00000D6C /* KBLocationProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBLocationProvider.h; sourceTree = "<group>"; };
 		761684201BFBEFEC00000D6C /* KBLocationProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KBLocationProvider.m; sourceTree = "<group>"; };
 		761684271BFBF19B00000D6C /* FlickrGallery-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlickrGallery-Bridging-Header.h"; sourceTree = "<group>"; };
+		76A5775E1BFC8E250026D363 /* PinchLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PinchLayout.h; path = "../../../../../../../Downloads/UICollectionView-Demo-master/CollectionViewTest/CollectionViewTest/PinchLayout.h"; sourceTree = "<group>"; };
+		76A5775F1BFC8E250026D363 /* PinchLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PinchLayout.m; path = "../../../../../../../Downloads/UICollectionView-Demo-master/CollectionViewTest/CollectionViewTest/PinchLayout.m"; sourceTree = "<group>"; };
 		9F993757681A8C08B8312D5C /* Pods_FlickrGallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickrGallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDADB0F82BB324E674AEA1D7 /* Pods-FlickrGallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrGallery.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickrGallery/Pods-FlickrGallery.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,6 +151,7 @@
 			children = (
 				761684161BFBEFBD00000D6C /* Location */,
 				761683F81BFBC0BA00000D6C /* Models */,
+				76A5775D1BFC8E150026D363 /* Layouts */,
 				761683FE1BFBC55100000D6C /* Views */,
 				761683F91BFBC0BA00000D6C /* ViewControllers */,
 				761683C71BFBBFB200000D6C /* AppDelegate.swift */,
@@ -245,6 +251,16 @@
 			);
 			name = Location;
 			path = Classes/Location;
+			sourceTree = "<group>";
+		};
+		76A5775D1BFC8E150026D363 /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				76A5775E1BFC8E250026D363 /* PinchLayout.h */,
+				76A5775F1BFC8E250026D363 /* PinchLayout.m */,
+			);
+			name = Layouts;
+			path = Classes/Layouts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -437,6 +453,7 @@
 			files = (
 				761684001BFBC56F00000D6C /* GalleryCell.swift in Sources */,
 				761683FB1BFBC0CD00000D6C /* GalleryViewController.swift in Sources */,
+				76A577621BFC8E250026D363 /* PinchLayout.m in Sources */,
 				761684211BFBEFEC00000D6C /* KBLocationProvider.m in Sources */,
 				761683D01BFBBFB200000D6C /* FlickrGallery.xcdatamodeld in Sources */,
 				761683C81BFBBFB200000D6C /* AppDelegate.swift in Sources */,
@@ -449,6 +466,7 @@
 			files = (
 				761684221BFBEFEC00000D6C /* KBLocationProvider.m in Sources */,
 				761684011BFBC56F00000D6C /* GalleryCell.swift in Sources */,
+				76A577631BFC8E250026D363 /* PinchLayout.m in Sources */,
 				761683E01BFBBFB300000D6C /* FlickrGalleryTests.swift in Sources */,
 				761683FC1BFBC0CD00000D6C /* GalleryViewController.swift in Sources */,
 			);
@@ -460,6 +478,7 @@
 			files = (
 				761684231BFBEFEC00000D6C /* KBLocationProvider.m in Sources */,
 				761684021BFBC56F00000D6C /* GalleryCell.swift in Sources */,
+				76A577641BFC8E250026D363 /* PinchLayout.m in Sources */,
 				761683EB1BFBBFB300000D6C /* FlickrGalleryUITests.swift in Sources */,
 				761683FD1BFBC0CD00000D6C /* GalleryViewController.swift in Sources */,
 			);

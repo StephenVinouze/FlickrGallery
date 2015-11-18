@@ -3,4 +3,4 @@
 //
 
 #import "KBLocationProvider.h"
-
+#import "PinchLayout.h"
