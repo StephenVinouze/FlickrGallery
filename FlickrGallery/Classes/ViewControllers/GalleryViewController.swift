@@ -142,6 +142,10 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
             }
         }
         else {
+            if pinchLayout.pinchedCellScale > 2 {
+                showZoomView(pinchLayout.pinchedCellPath)
+            }
+            
             collectionView?.performBatchUpdates({ () -> Void in
                 pinchLayout.pinchedCellPath = nil;
                 pinchLayout.pinchedCellScale = 1.0;
