@@ -34,17 +34,18 @@ class ZoomViewController : UIViewController, UIGestureRecognizerDelegate {
         view.addGestureRecognizer(rotateGesture)
     }
     
-    func onTap() {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func onPinch(sender : UIPinchGestureRecognizer) {
-        if sender.state == .Changed {
-            scale = sender.scale
+    func handleGestures(gesture: UIGestureRecognizer) {
+        if gesture.state == .Changed {
+            if let pinchGesture = gesture as? UIPinchGestureRecognizer {
+                scale = pinchGesture.scale
+            }
+            else if let rotationGesture = gesture as? UIRotationGestureRecognizer {
+                rotation = rotationGesture.rotation
+            }
         }
-        else if sender.state == .Ended {
+        else if gesture.state == .Ended {
             
-            if sender.scale <= 0.5 {
+            if scale <= 0.5 {
                 dismissViewControllerAnimated(true, completion: nil)
                 return
             }
@@ -55,15 +56,16 @@ class ZoomViewController : UIViewController, UIGestureRecognizerDelegate {
         photo.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scale, scale), CGAffineTransformMakeRotation(rotation))
     }
     
+    func onTap() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func onPinch(sender : UIPinchGestureRecognizer) {
+        handleGestures(sender)
+    }
+    
     func onRotate(sender : UIRotationGestureRecognizer) {
-        if sender.state == .Changed {
-            rotation = sender.rotation
-        }
-        else if sender.state == .Ended {
-            scale = 1
-            rotation = 0
-        }
-        photo.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scale, scale), CGAffineTransformMakeRotation(rotation))
+        handleGestures(sender)
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
