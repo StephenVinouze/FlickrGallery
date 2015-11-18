@@ -52,6 +52,8 @@ class GalleryViewController : UICollectionViewController {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 
                 if (response != nil) {
+                    self.photos.removeAll()
+                    
                     let topPhotos = response["photos"] as! [NSObject: AnyObject]
                     let photoArray = topPhotos["photo"] as! [[NSObject: AnyObject]]
                     for photoDictionary in photoArray {
