@@ -61,7 +61,7 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
         }
     }
     
-    func fetchPhotos(location : CLLocation!) {
+    func fetchPhotos(location : CLLocation) {
         if !isLoading {
             isLoading = true;
             
@@ -102,11 +102,26 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
         }
     }
     
-    func showAlertError(message : String!) {
+    func showAlertError(message : String) {
         let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         
         self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func showZoomView(indexPath: NSIndexPath) {
+        let attributes = collectionView?.layoutAttributesForItemAtIndexPath(indexPath)
+        let attributesFrame = attributes?.frame
+        let frameToOpenFrom = collectionView?.convertRect(attributesFrame!, toView: collectionView?.superview)
+        transitionDelegate.openingFrame = frameToOpenFrom
+        
+        let zoomViewController = storyboard?.instantiateViewControllerWithIdentifier("zoom_storyboard_id") as! ZoomViewController
+        zoomViewController.imageUrl = photos[indexPath.row].zoomImageUrl
+        zoomViewController.transitioningDelegate = transitionDelegate
+        zoomViewController.modalPresentationStyle = .Custom
+        
+        //navigationController?.pushViewController(zoomViewController, animated: true)
+        presentViewController(zoomViewController, animated: true, completion: nil)
     }
     
     func handleGesture(gesture: UIGestureRecognizer) {
@@ -171,18 +186,7 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         collectionView.deselectItemAtIndexPath(indexPath, animated: true)
         
-        let attributes = collectionView.layoutAttributesForItemAtIndexPath(indexPath)
-        let attributesFrame = attributes?.frame
-        let frameToOpenFrom = collectionView.convertRect(attributesFrame!, toView: collectionView.superview)
-        transitionDelegate.openingFrame = frameToOpenFrom
-        
-        let zoomViewController = storyboard?.instantiateViewControllerWithIdentifier("zoom_storyboard_id") as! ZoomViewController
-        zoomViewController.imageUrl = photos[indexPath.row].zoomImageUrl
-        zoomViewController.transitioningDelegate = transitionDelegate
-        zoomViewController.modalPresentationStyle = .Custom
-        
-        //navigationController?.pushViewController(zoomViewController, animated: true)
-        presentViewController(zoomViewController, animated: true, completion: nil)
+        showZoomView(indexPath)
     }
     
 }

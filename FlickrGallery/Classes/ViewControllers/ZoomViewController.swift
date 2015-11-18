@@ -42,17 +42,26 @@ class ZoomViewController : UIViewController, UIGestureRecognizerDelegate {
             else if let rotationGesture = gesture as? UIRotationGestureRecognizer {
                 rotation = rotationGesture.rotation
             }
+            
+            transformPhoto()
         }
         else if gesture.state == .Ended {
             
             if scale <= 0.5 {
                 dismissViewControllerAnimated(true, completion: nil)
-                return
             }
-            
-            scale = 1
-            rotation = 0
+            else {
+                scale = 1
+                rotation = 0
+                
+                [UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.transformPhoto()
+                    }, completion: nil)]
+            }
         }
+    }
+    
+    func transformPhoto() {
         photo.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scale, scale), CGAffineTransformMakeRotation(rotation))
     }
     
