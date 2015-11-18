@@ -15,8 +15,12 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
     
     private let photosPerCell = 4
     private let refreshControl = UIRefreshControl()
+    private let transitionDelegate = GalleryTransitionDelegate()
     private var isLoading = false
-    private var photos = [NSURL]()
+    
+    typealias Photo = (thumbnailImageUrl: NSURL, zoomImageUrl: NSURL?)
+    
+    var photos: [Photo] = []
     
     deinit {
         KBLocationProvider.instance().stopFetchLocation()
@@ -72,8 +76,10 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
                         let topPhotos = response["photos"] as! [NSObject: AnyObject]
                         let photoArray = topPhotos["photo"] as! [[NSObject: AnyObject]]
                         for photoDictionary in photoArray {
-                            let photoURL = flickrKit.photoURLForSize(FKPhotoSizeSmall240, fromPhotoDictionary: photoDictionary)
-                            self.photos.append(photoURL)
+                            let thumbnailImageUrl = flickrKit.photoURLForSize(FKPhotoSizeSmall240, fromPhotoDictionary: photoDictionary)
+                            let zoomImageUrl = flickrKit.photoURLForSize(FKPhotoSizeLarge1024, fromPhotoDictionary: photoDictionary)
+                            
+                            self.photos.append((thumbnailImageUrl: thumbnailImageUrl, zoomImageUrl: zoomImageUrl))
                         }
                     }
                     else {
@@ -155,13 +161,26 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("gallery_cell_identifier", forIndexPath: indexPath) as! GalleryCell
-        cell.photo.sd_setImageWithURL(photos[indexPath.row])
+        cell.photo.sd_setImageWithURL(photos[indexPath.row].thumbnailImageUrl)
         
         return cell
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
         
+        let attributes = collectionView.layoutAttributesForItemAtIndexPath(indexPath)
+        let attributesFrame = attributes?.frame
+        let frameToOpenFrom = collectionView.convertRect(attributesFrame!, toView: collectionView.superview)
+        transitionDelegate.openingFrame = frameToOpenFrom
+        
+        let zoomViewController = storyboard?.instantiateViewControllerWithIdentifier("zoom_storyboard_id") as! ZoomViewController
+        zoomViewController.imageUrl = photos[indexPath.row].zoomImageUrl
+        zoomViewController.transitioningDelegate = transitionDelegate
+        zoomViewController.modalPresentationStyle = .Custom
+        
+        //navigationController?.pushViewController(zoomViewController, animated: true)
+        presentViewController(zoomViewController, animated: true, completion: nil)
     }
     
 }

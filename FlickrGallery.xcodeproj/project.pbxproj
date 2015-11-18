@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		761683C81BFBBFB200000D6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761683C71BFBBFB200000D6C /* AppDelegate.swift */; };
-		761683CD1BFBBFB200000D6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 761683CB1BFBBFB200000D6C /* Main.storyboard */; };
 		761683D01BFBBFB200000D6C /* FlickrGallery.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 761683CE1BFBBFB200000D6C /* FlickrGallery.xcdatamodeld */; };
 		761683D21BFBBFB200000D6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 761683D11BFBBFB200000D6C /* Assets.xcassets */; };
 		761683D51BFBBFB200000D6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 761683D31BFBBFB200000D6C /* LaunchScreen.storyboard */; };
@@ -32,6 +31,21 @@
 		76A577621BFC8E250026D363 /* PinchLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A5775F1BFC8E250026D363 /* PinchLayout.m */; };
 		76A577631BFC8E250026D363 /* PinchLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A5775F1BFC8E250026D363 /* PinchLayout.m */; };
 		76A577641BFC8E250026D363 /* PinchLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A5775F1BFC8E250026D363 /* PinchLayout.m */; };
+		76A5776D1BFCB1B70026D363 /* ZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A5776C1BFCB1B70026D363 /* ZoomViewController.swift */; };
+		76A5776E1BFCB1B70026D363 /* ZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A5776C1BFCB1B70026D363 /* ZoomViewController.swift */; };
+		76A5776F1BFCB1B70026D363 /* ZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A5776C1BFCB1B70026D363 /* ZoomViewController.swift */; };
+		76A577721BFCB25A0026D363 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76A577701BFCB25A0026D363 /* Main.storyboard */; };
+		76A577731BFCB25A0026D363 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76A577701BFCB25A0026D363 /* Main.storyboard */; };
+		76A577741BFCB25A0026D363 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76A577701BFCB25A0026D363 /* Main.storyboard */; };
+		76A577771BFCDC160026D363 /* GalleryTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A577761BFCDC160026D363 /* GalleryTransitionDelegate.swift */; };
+		76A577781BFCDC160026D363 /* GalleryTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A577761BFCDC160026D363 /* GalleryTransitionDelegate.swift */; };
+		76A577791BFCDC160026D363 /* GalleryTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A577761BFCDC160026D363 /* GalleryTransitionDelegate.swift */; };
+		76A5777B1BFCDC500026D363 /* GalleryPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A5777A1BFCDC500026D363 /* GalleryPresentationAnimator.swift */; };
+		76A5777C1BFCDC500026D363 /* GalleryPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A5777A1BFCDC500026D363 /* GalleryPresentationAnimator.swift */; };
+		76A5777D1BFCDC500026D363 /* GalleryPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A5777A1BFCDC500026D363 /* GalleryPresentationAnimator.swift */; };
+		76A5777F1BFCDC6A0026D363 /* GalleryDismissalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A5777E1BFCDC6A0026D363 /* GalleryDismissalAnimator.swift */; };
+		76A577801BFCDC6A0026D363 /* GalleryDismissalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A5777E1BFCDC6A0026D363 /* GalleryDismissalAnimator.swift */; };
+		76A577811BFCDC6A0026D363 /* GalleryDismissalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A5777E1BFCDC6A0026D363 /* GalleryDismissalAnimator.swift */; };
 		C1B2E72A7C5F0740751D6EE7 /* Pods_FlickrGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F993757681A8C08B8312D5C /* Pods_FlickrGallery.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,7 +70,6 @@
 		2FC96B80773CF31C8DEC9DAA /* Pods-FlickrGallery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrGallery.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickrGallery/Pods-FlickrGallery.release.xcconfig"; sourceTree = "<group>"; };
 		761683C41BFBBFB200000D6C /* FlickrGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		761683C71BFBBFB200000D6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		761683CC1BFBBFB200000D6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		761683CF1BFBBFB200000D6C /* FlickrGallery.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlickrGallery.xcdatamodel; sourceTree = "<group>"; };
 		761683D11BFBBFB200000D6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		761683D41BFBBFB200000D6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -76,6 +89,11 @@
 		761684271BFBF19B00000D6C /* FlickrGallery-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlickrGallery-Bridging-Header.h"; sourceTree = "<group>"; };
 		76A5775E1BFC8E250026D363 /* PinchLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PinchLayout.h; path = "../../../../../../../Downloads/UICollectionView-Demo-master/CollectionViewTest/CollectionViewTest/PinchLayout.h"; sourceTree = "<group>"; };
 		76A5775F1BFC8E250026D363 /* PinchLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PinchLayout.m; path = "../../../../../../../Downloads/UICollectionView-Demo-master/CollectionViewTest/CollectionViewTest/PinchLayout.m"; sourceTree = "<group>"; };
+		76A5776C1BFCB1B70026D363 /* ZoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomViewController.swift; sourceTree = "<group>"; };
+		76A577711BFCB25A0026D363 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		76A577761BFCDC160026D363 /* GalleryTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryTransitionDelegate.swift; sourceTree = "<group>"; };
+		76A5777A1BFCDC500026D363 /* GalleryPresentationAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPresentationAnimator.swift; sourceTree = "<group>"; };
+		76A5777E1BFCDC6A0026D363 /* GalleryDismissalAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryDismissalAnimator.swift; sourceTree = "<group>"; };
 		9F993757681A8C08B8312D5C /* Pods_FlickrGallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickrGallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDADB0F82BB324E674AEA1D7 /* Pods-FlickrGallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrGallery.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickrGallery/Pods-FlickrGallery.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,11 +170,12 @@
 				761684161BFBEFBD00000D6C /* Location */,
 				761683F81BFBC0BA00000D6C /* Models */,
 				76A5775D1BFC8E150026D363 /* Layouts */,
+				76A577751BFCDBFC0026D363 /* Transitions */,
 				761683FE1BFBC55100000D6C /* Views */,
 				761683F91BFBC0BA00000D6C /* ViewControllers */,
 				761683C71BFBBFB200000D6C /* AppDelegate.swift */,
-				761683CB1BFBBFB200000D6C /* Main.storyboard */,
 				761683D11BFBBFB200000D6C /* Assets.xcassets */,
+				76A577701BFCB25A0026D363 /* Main.storyboard */,
 				761683D31BFBBFB200000D6C /* LaunchScreen.storyboard */,
 				761683D61BFBBFB200000D6C /* Info.plist */,
 				761683CE1BFBBFB200000D6C /* FlickrGallery.xcdatamodeld */,
@@ -195,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				761683FA1BFBC0CD00000D6C /* GalleryViewController.swift */,
+				76A5776C1BFCB1B70026D363 /* ZoomViewController.swift */,
 			);
 			name = ViewControllers;
 			path = Classes/ViewControllers;
@@ -261,6 +281,17 @@
 			);
 			name = Layouts;
 			path = Classes/Layouts;
+			sourceTree = "<group>";
+		};
+		76A577751BFCDBFC0026D363 /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				76A577761BFCDC160026D363 /* GalleryTransitionDelegate.swift */,
+				76A5777A1BFCDC500026D363 /* GalleryPresentationAnimator.swift */,
+				76A5777E1BFCDC6A0026D363 /* GalleryDismissalAnimator.swift */,
+			);
+			name = Transitions;
+			path = Classes/Transitions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,10 +402,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				761684131BFBE79A00000D6C /* Localizable.strings in Resources */,
+				76A577721BFCB25A0026D363 /* Main.storyboard in Resources */,
 				761683D51BFBBFB200000D6C /* LaunchScreen.storyboard in Resources */,
 				761684101BFBE79A00000D6C /* Localizable.strings in Resources */,
 				761683D21BFBBFB200000D6C /* Assets.xcassets in Resources */,
-				761683CD1BFBBFB200000D6C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +413,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76A577731BFCB25A0026D363 /* Main.storyboard in Resources */,
 				761684111BFBE79A00000D6C /* Localizable.strings in Resources */,
 				761684141BFBE79A00000D6C /* Localizable.strings in Resources */,
 			);
@@ -391,6 +423,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76A577741BFCB25A0026D363 /* Main.storyboard in Resources */,
 				761684121BFBE79A00000D6C /* Localizable.strings in Resources */,
 				761684151BFBE79A00000D6C /* Localizable.strings in Resources */,
 			);
@@ -451,8 +484,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76A577771BFCDC160026D363 /* GalleryTransitionDelegate.swift in Sources */,
+				76A5777F1BFCDC6A0026D363 /* GalleryDismissalAnimator.swift in Sources */,
+				76A5777B1BFCDC500026D363 /* GalleryPresentationAnimator.swift in Sources */,
 				761684001BFBC56F00000D6C /* GalleryCell.swift in Sources */,
 				761683FB1BFBC0CD00000D6C /* GalleryViewController.swift in Sources */,
+				76A5776D1BFCB1B70026D363 /* ZoomViewController.swift in Sources */,
 				76A577621BFC8E250026D363 /* PinchLayout.m in Sources */,
 				761684211BFBEFEC00000D6C /* KBLocationProvider.m in Sources */,
 				761683D01BFBBFB200000D6C /* FlickrGallery.xcdatamodeld in Sources */,
@@ -465,10 +502,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				761684221BFBEFEC00000D6C /* KBLocationProvider.m in Sources */,
+				76A5777C1BFCDC500026D363 /* GalleryPresentationAnimator.swift in Sources */,
+				76A5776E1BFCB1B70026D363 /* ZoomViewController.swift in Sources */,
+				76A577781BFCDC160026D363 /* GalleryTransitionDelegate.swift in Sources */,
 				761684011BFBC56F00000D6C /* GalleryCell.swift in Sources */,
 				76A577631BFC8E250026D363 /* PinchLayout.m in Sources */,
 				761683E01BFBBFB300000D6C /* FlickrGalleryTests.swift in Sources */,
 				761683FC1BFBC0CD00000D6C /* GalleryViewController.swift in Sources */,
+				76A577801BFCDC6A0026D363 /* GalleryDismissalAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,10 +518,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				761684231BFBEFEC00000D6C /* KBLocationProvider.m in Sources */,
+				76A5777D1BFCDC500026D363 /* GalleryPresentationAnimator.swift in Sources */,
+				76A5776F1BFCB1B70026D363 /* ZoomViewController.swift in Sources */,
+				76A577791BFCDC160026D363 /* GalleryTransitionDelegate.swift in Sources */,
 				761684021BFBC56F00000D6C /* GalleryCell.swift in Sources */,
 				76A577641BFC8E250026D363 /* PinchLayout.m in Sources */,
 				761683EB1BFBBFB300000D6C /* FlickrGalleryUITests.swift in Sources */,
 				761683FD1BFBC0CD00000D6C /* GalleryViewController.swift in Sources */,
+				76A577811BFCDC6A0026D363 /* GalleryDismissalAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,14 +545,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		761683CB1BFBBFB200000D6C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				761683CC1BFBBFB200000D6C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		761683D31BFBBFB200000D6C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -530,6 +567,14 @@
 				7616840F1BFBE79A00000D6C /* fr */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		76A577701BFCB25A0026D363 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76A577711BFCB25A0026D363 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

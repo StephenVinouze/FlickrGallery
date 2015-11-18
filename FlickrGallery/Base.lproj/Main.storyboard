@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EZh-Mx-GOp">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--FlickrGallery-->
@@ -28,7 +28,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="93" height="92"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Eei-s4-ptJ">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Eei-s4-ptJ">
                                             <rect key="frame" x="0.0" y="0.0" width="93" height="92"/>
                                             <animations/>
                                         </imageView>
@@ -60,6 +60,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mlR-JC-TMc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="761" y="69"/>
+        </scene>
+        <!--Zoom View Controller-->
+        <scene sceneID="K8h-Fz-47s">
+            <objects>
+                <viewController storyboardIdentifier="zoom_storyboard_id" id="Ly6-ur-bl7" customClass="ZoomViewController" customModule="FlickrGallery" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Hbv-nh-Igz"/>
+                        <viewControllerLayoutGuide type="bottom" id="wd4-lj-G8O"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jNE-oh-2k7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TQk-Xk-2Bn">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                            </imageView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="TQk-Xk-2Bn" secondAttribute="trailing" constant="-20" id="EE8-1f-s1t"/>
+                            <constraint firstItem="TQk-Xk-2Bn" firstAttribute="top" secondItem="Hbv-nh-Igz" secondAttribute="bottom" constant="-20" id="U0i-iV-fmR"/>
+                            <constraint firstItem="wd4-lj-G8O" firstAttribute="top" secondItem="TQk-Xk-2Bn" secondAttribute="bottom" id="t1M-y4-Xfs"/>
+                            <constraint firstItem="TQk-Xk-2Bn" firstAttribute="leading" secondItem="jNE-oh-2k7" secondAttribute="leadingMargin" constant="-20" id="xZB-Jv-6M6"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="photo" destination="TQk-Xk-2Bn" id="F7A-6d-EdI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MEa-f8-Lr3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1487" y="69"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hh5-uo-HoH">
