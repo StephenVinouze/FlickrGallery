@@ -9,7 +9,6 @@
 import UIKit
 import CoreLocation
 import FlickrKit
-import SDWebImage
 import MBProgressHUD
 
 class GalleryViewController : UICollectionViewController, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
@@ -20,9 +19,7 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
     private var isLoading = false
     private var lastLocation : CLLocation?
     
-    typealias Photo = (thumbnailImageUrl: NSURL, zoomImageUrl: NSURL?)
-    
-    var photos: [Photo] = []
+    var photos = [UIImage]()
     
     deinit {
         KBLocationProvider.instance().stopFetchLocation()
@@ -75,31 +72,48 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
             
             let flickrKit = FlickrKit.sharedFlickrKit()
             flickrKit.call(photoSearch) { (response, error) -> Void in
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                if (response != nil) {
+                    self.photos.removeAll()
                     
-                    if (response != nil) {
-                        self.photos.removeAll()
+                    let topPhotos = response["photos"] as! [NSObject: AnyObject]
+                    let photoArray = topPhotos["photo"] as! [[NSObject: AnyObject]]
+                    for photoDictionary in photoArray {
+                        let imageUrl = flickrKit.photoURLForSize(FKPhotoSizeLarge1024, fromPhotoDictionary: photoDictionary)
                         
-                        let topPhotos = response["photos"] as! [NSObject: AnyObject]
-                        let photoArray = topPhotos["photo"] as! [[NSObject: AnyObject]]
-                        for photoDictionary in photoArray {
-                            let thumbnailImageUrl = flickrKit.photoURLForSize(FKPhotoSizeSmall240, fromPhotoDictionary: photoDictionary)
-                            let zoomImageUrl = flickrKit.photoURLForSize(FKPhotoSizeLarge1024, fromPhotoDictionary: photoDictionary)
-                            
-                            self.photos.append((thumbnailImageUrl: thumbnailImageUrl, zoomImageUrl: zoomImageUrl))
-                        }
+                        self.downloadImage(imageUrl, completion: { (image, error) -> Void in
+                            if image != nil {
+                                self.photos.append(image!)
+                                
+                                if self.photos.count == photoArray.count {
+                                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                        self.finalizeSync()
+                                    })
+                                    
+                                }
+                            }
+                        })
                     }
-                    else {
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
                         self.showAlertError(error.localizedDescription)
-                    }
-                    
-                    hud.hide(true)
-                    self.collectionView?.reloadData()
-                    self.refreshControl.endRefreshing()
-                    self.isLoading = false
-                })
+                        self.finalizeSync()
+                    })
+                }
             }
         }
+    }
+    
+    func downloadImage(url: NSURL, completion: ((image: UIImage?, error: NSError?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+            if data != nil {
+                completion(image: UIImage(data: data!), error: nil)
+            }
+            else {
+                completion(image: nil, error: error)
+            }
+        }.resume()
     }
     
     func showAlertError(message : String) {
@@ -109,6 +123,13 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
+    func finalizeSync() {
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
+        self.collectionView?.reloadData()
+        self.refreshControl.endRefreshing()
+        self.isLoading = false
+    }
+    
     func showZoomView(indexPath: NSIndexPath) {
         let attributes = collectionView?.layoutAttributesForItemAtIndexPath(indexPath)
         let attributesFrame = attributes?.frame
@@ -116,7 +137,7 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
         transitionDelegate.openingFrame = frameToOpenFrom
         
         let zoomViewController = storyboard?.instantiateViewControllerWithIdentifier("zoom_storyboard_id") as! ZoomViewController
-        zoomViewController.imageUrl = photos[indexPath.row].zoomImageUrl
+        zoomViewController.image = photos[indexPath.row]
         zoomViewController.transitioningDelegate = transitionDelegate
         zoomViewController.modalPresentationStyle = .Custom
         
@@ -182,7 +203,7 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("gallery_cell_identifier", forIndexPath: indexPath) as! GalleryCell
-        cell.photo.sd_setImageWithURL(photos[indexPath.row].thumbnailImageUrl)
+        cell.photo.image = photos[indexPath.row]
         
         return cell
     }

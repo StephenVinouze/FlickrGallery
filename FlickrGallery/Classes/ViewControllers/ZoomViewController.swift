@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import SDWebImage
 
 class ZoomViewController : UIViewController, UIGestureRecognizerDelegate {
     
-    var imageUrl : NSURL?
+    var image : UIImage?
     private var scale :CGFloat = 1
     private var rotation :CGFloat = 0
     
@@ -19,7 +18,7 @@ class ZoomViewController : UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        photo.sd_setImageWithURL(imageUrl)
+        photo.image = image
         
         let tapGesture = UITapGestureRecognizer(target: self, action: "onTap")
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: "onPinch:")
