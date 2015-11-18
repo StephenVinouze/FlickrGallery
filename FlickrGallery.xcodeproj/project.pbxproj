@@ -31,6 +31,12 @@
 		766F76E41BFD1B1800BA273B /* PinchLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 766F76E31BFD1B1800BA273B /* PinchLayout.m */; };
 		766F76E51BFD1B1800BA273B /* PinchLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 766F76E31BFD1B1800BA273B /* PinchLayout.m */; };
 		766F76E61BFD1B1800BA273B /* PinchLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 766F76E31BFD1B1800BA273B /* PinchLayout.m */; };
+		766F76E91BFD2F3E00BA273B /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766F76E71BFD2F3E00BA273B /* Photo+CoreDataProperties.swift */; };
+		766F76EA1BFD2F3E00BA273B /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766F76E71BFD2F3E00BA273B /* Photo+CoreDataProperties.swift */; };
+		766F76EB1BFD2F3E00BA273B /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766F76E71BFD2F3E00BA273B /* Photo+CoreDataProperties.swift */; };
+		766F76EC1BFD2F3E00BA273B /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766F76E81BFD2F3E00BA273B /* Photo.swift */; };
+		766F76ED1BFD2F3E00BA273B /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766F76E81BFD2F3E00BA273B /* Photo.swift */; };
+		766F76EE1BFD2F3E00BA273B /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766F76E81BFD2F3E00BA273B /* Photo.swift */; };
 		76A5776D1BFCB1B70026D363 /* ZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A5776C1BFCB1B70026D363 /* ZoomViewController.swift */; };
 		76A5776E1BFCB1B70026D363 /* ZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A5776C1BFCB1B70026D363 /* ZoomViewController.swift */; };
 		76A5776F1BFCB1B70026D363 /* ZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A5776C1BFCB1B70026D363 /* ZoomViewController.swift */; };
@@ -90,6 +96,8 @@
 		766F76E01BFD144C00BA273B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		766F76E21BFD1B1800BA273B /* PinchLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinchLayout.h; sourceTree = "<group>"; };
 		766F76E31BFD1B1800BA273B /* PinchLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinchLayout.m; sourceTree = "<group>"; };
+		766F76E71BFD2F3E00BA273B /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Photo+CoreDataProperties.swift"; path = "Classes/Models/Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		766F76E81BFD2F3E00BA273B /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Photo.swift; path = Classes/Models/Photo.swift; sourceTree = "<group>"; };
 		76A5776C1BFCB1B70026D363 /* ZoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomViewController.swift; sourceTree = "<group>"; };
 		76A577711BFCB25A0026D363 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		76A577761BFCDC160026D363 /* GalleryTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryTransitionDelegate.swift; sourceTree = "<group>"; };
@@ -169,6 +177,8 @@
 		761683C61BFBBFB200000D6C /* FlickrGallery */ = {
 			isa = PBXGroup;
 			children = (
+				766F76E71BFD2F3E00BA273B /* Photo+CoreDataProperties.swift */,
+				766F76E81BFD2F3E00BA273B /* Photo.swift */,
 				761684161BFBEFBD00000D6C /* Location */,
 				761683F81BFBC0BA00000D6C /* Models */,
 				76A5775D1BFC8E150026D363 /* Layouts */,
@@ -486,6 +496,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				766F76EC1BFD2F3E00BA273B /* Photo.swift in Sources */,
 				76A577771BFCDC160026D363 /* GalleryTransitionDelegate.swift in Sources */,
 				76A5777F1BFCDC6A0026D363 /* GalleryDismissalAnimator.swift in Sources */,
 				766F76E41BFD1B1800BA273B /* PinchLayout.m in Sources */,
@@ -494,6 +505,7 @@
 				761683FB1BFBC0CD00000D6C /* GalleryViewController.swift in Sources */,
 				76A5776D1BFCB1B70026D363 /* ZoomViewController.swift in Sources */,
 				761684211BFBEFEC00000D6C /* KBLocationProvider.m in Sources */,
+				766F76E91BFD2F3E00BA273B /* Photo+CoreDataProperties.swift in Sources */,
 				761683D01BFBBFB200000D6C /* FlickrGallery.xcdatamodeld in Sources */,
 				761683C81BFBBFB200000D6C /* AppDelegate.swift in Sources */,
 			);
@@ -510,7 +522,9 @@
 				761684011BFBC56F00000D6C /* GalleryCell.swift in Sources */,
 				766F76E51BFD1B1800BA273B /* PinchLayout.m in Sources */,
 				761683E01BFBBFB300000D6C /* FlickrGalleryTests.swift in Sources */,
+				766F76ED1BFD2F3E00BA273B /* Photo.swift in Sources */,
 				761683FC1BFBC0CD00000D6C /* GalleryViewController.swift in Sources */,
+				766F76EA1BFD2F3E00BA273B /* Photo+CoreDataProperties.swift in Sources */,
 				76A577801BFCDC6A0026D363 /* GalleryDismissalAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -526,7 +540,9 @@
 				761684021BFBC56F00000D6C /* GalleryCell.swift in Sources */,
 				766F76E61BFD1B1800BA273B /* PinchLayout.m in Sources */,
 				761683EB1BFBBFB300000D6C /* FlickrGalleryUITests.swift in Sources */,
+				766F76EE1BFD2F3E00BA273B /* Photo.swift in Sources */,
 				761683FD1BFBC0CD00000D6C /* GalleryViewController.swift in Sources */,
+				766F76EB1BFD2F3E00BA273B /* Photo+CoreDataProperties.swift in Sources */,
 				76A577811BFCDC6A0026D363 /* GalleryDismissalAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

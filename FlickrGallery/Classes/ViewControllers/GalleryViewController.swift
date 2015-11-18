@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import CoreData
 import FlickrKit
 import MBProgressHUD
 
@@ -45,7 +46,7 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 if location != nil {
                     
-                    if self.lastLocation == nil || location.distanceFromLocation(self.lastLocation!) > 10 {
+                    if self.lastLocation == nil || location.distanceFromLocation(self.lastLocation!) > 50 {
                         self.fetchPhotos(location)
                     }
                     
@@ -79,17 +80,17 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
                     let topPhotos = response["photos"] as! [NSObject: AnyObject]
                     let photoArray = topPhotos["photo"] as! [[NSObject: AnyObject]]
                     for photoDictionary in photoArray {
-                        let imageUrl = flickrKit.photoURLForSize(FKPhotoSizeLarge1024, fromPhotoDictionary: photoDictionary)
+                        let imageUrl = flickrKit.photoURLForSize(FKPhotoSizeSmall240, fromPhotoDictionary: photoDictionary)
                         
                         self.downloadImage(imageUrl, completion: { (image, error) -> Void in
                             if image != nil {
                                 self.photos.append(image!)
+                                self.saveImage(image!)
                                 
                                 if self.photos.count == photoArray.count {
                                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                         self.finalizeSync()
                                     })
-                                    
                                 }
                             }
                         })
@@ -114,6 +115,22 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
                 completion(image: nil, error: error)
             }
         }.resume()
+    }
+    
+    func saveImage(image: UIImage) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        let entity =  NSEntityDescription.entityForName("Photo", inManagedObjectContext:managedContext)
+        let photo = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext) as! Photo
+        
+        photo.image = UIImagePNGRepresentation(image)
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError  {
+            print("Could not save photo in database : \(error), \(error.userInfo)")
+        }
     }
     
     func showAlertError(message : String) {
