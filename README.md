@@ -13,11 +13,8 @@ It also lets you see how to manage an iOS project written in **Swift** and how t
 ![alt Share](Art/share.gif)
 
 ![alt Gallery](Art/gallery.png)
-
 ![alt Gesture](Art/gesture.png)
-
 ![alt Multi select](Art/multiselect.png)
-
 ![alt Share](Art/share.png)
 
 ## Features
