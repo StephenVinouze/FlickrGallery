@@ -28,7 +28,7 @@ class GalleryPresentationAnimator: NSObject, UIViewControllerAnimatedTransitioni
         
         UIGraphicsBeginImageContext(fromViewFrame.size)
         fromViewController.view.drawViewHierarchyInRect(fromViewFrame, afterScreenUpdates: true)
-        let snapshotImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         let snapshotView = toViewController.view.resizableSnapshotViewFromRect(toViewController.view.frame, afterScreenUpdates: true, withCapInsets: UIEdgeInsetsZero)

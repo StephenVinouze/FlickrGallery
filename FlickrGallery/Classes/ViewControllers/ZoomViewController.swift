@@ -33,6 +33,10 @@ class ZoomViewController : UIViewController, UIGestureRecognizerDelegate {
         view.addGestureRecognizer(rotateGesture)
     }
     
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     func handleGestures(gesture: UIGestureRecognizer) {
         if gesture.state == .Changed {
             if let pinchGesture = gesture as? UIPinchGestureRecognizer {
