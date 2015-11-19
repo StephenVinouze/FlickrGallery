@@ -55,7 +55,22 @@
                             <outlet property="delegate" destination="KPc-D3-OYc" id="LQw-Pp-g0F"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="FlickrGallery" id="kwp-5v-JWa"/>
+                    <navigationItem key="navigationItem" title="FlickrGallery" id="kwp-5v-JWa">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="HZX-NF-8QZ">
+                            <connections>
+                                <action selector="onCancel" destination="KPc-D3-OYc" id="lzc-0G-SQd"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="JZI-Cq-3VW">
+                            <connections>
+                                <action selector="onShare" destination="KPc-D3-OYc" id="Kus-sx-ZQw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cancelBarButton" destination="HZX-NF-8QZ" id="TOR-Wc-RFj"/>
+                        <outlet property="shareBarButton" destination="JZI-Cq-3VW" id="hou-rP-jyt"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mlR-JC-TMc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

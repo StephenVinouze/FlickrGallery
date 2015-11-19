@@ -14,13 +14,17 @@ import MBProgressHUD
 
 class GalleryViewController : UICollectionViewController, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate {
     
-    private let photosPerCell = 4
     private let refreshControl = UIRefreshControl()
     private let transitionDelegate = GalleryTransitionDelegate()
     private var isLoading = false
+    private var isSharing = false
     private var lastLocation : CLLocation?
     
+    @IBOutlet weak var cancelBarButton : UIBarButtonItem?
+    @IBOutlet weak var shareBarButton : UIBarButtonItem?
+    
     var photos = [Photo]()
+    var selectedPhotos = [Photo]()
     
     deinit {
         KBLocationProvider.instance().stopFetchLocation()
@@ -42,8 +46,63 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
         collectionView?.addGestureRecognizer(pinchGesture)
         collectionView?.addGestureRecognizer(rotateGesture)
         
+        updateShareState(false)
         loadImages()
         fetchLocation()
+    }
+    
+    @IBAction func onCancel() {
+        selectedPhotos.removeAll()
+        updateShareState(false)
+    }
+    
+    @IBAction func onShare() {
+        if !isSharing {
+            updateShareState(true)
+            return
+        }
+        
+        if isSharing && selectedPhotos.count > 0 {
+            var selectedImages = [UIImage]()
+            for photo in selectedPhotos {
+                selectedImages.append(UIImage(data: photo.image!)!);
+            }
+            
+            let shareScreen = UIActivityViewController(activityItems: selectedImages, applicationActivities: nil)
+            if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+                let popover = UIPopoverController(contentViewController: shareScreen)
+                popover.presentPopoverFromBarButtonItem(navigationItem.rightBarButtonItems!.first! as UIBarButtonItem,
+                    permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+            }
+            else {
+                presentViewController(shareScreen, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func updateShareState(editState : Bool) {
+        isSharing = editState
+        
+        collectionView?.allowsMultipleSelection = editState
+        
+        cancelBarButton?.enabled = editState
+        cancelBarButton?.tintColor = !editState ? UIColor.clearColor() : nil
+        
+        UIView.performWithoutAnimation { () -> Void in
+            self.shareBarButton?.title = NSLocalizedString(editState ? "SharePhotos"  : "SelectPhotos", comment: "")
+        }
+        
+        updateBarTitle()
+    }
+    
+    func updateBarTitle() {
+        var barTitle = NSLocalizedString(isSharing ? "PickPhotos"  : "DisplayPhotos", comment: "")
+        let photoCount = selectedPhotos.count
+        if photoCount > 0 {
+            barTitle += " (" + String(photoCount) + ")"
+        }
+        
+        navigationItem.title = barTitle
     }
     
     func fetchLocation() {
@@ -270,9 +329,23 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
-        
-        showZoomView(indexPath)
+        if isSharing {
+            selectedPhotos.append(photos[indexPath.row])
+            updateBarTitle()
+        }
+        else {
+            collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+            
+            showZoomView(indexPath)
+        }
+    }
+    
+    override func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        if isSharing {
+            let selectedPhoto = photos[indexPath.row]
+            selectedPhotos.removeAtIndex(selectedPhotos.indexOf(selectedPhoto)!)
+            updateBarTitle()
+        }
     }
     
 }
