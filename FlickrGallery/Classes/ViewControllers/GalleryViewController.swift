@@ -52,8 +52,7 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
     }
     
     @IBAction func onCancel() {
-        selectedPhotos.removeAll()
-        updateShareState(false)
+        resetSelection()
     }
     
     @IBAction func onShare() {
@@ -72,8 +71,7 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
             shareScreen.completionWithItemsHandler = {
                 (activityType, completed, returnedItems, activityError) in
                 if completed {
-                    self.selectedPhotos.removeAll()
-                    self.updateShareState(false)
+                    self.resetSelection()
                 }
             }
             
@@ -115,6 +113,10 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
         navigationItem.title = barTitle
     }
     
+    func updateCellSelection(cell: UICollectionViewCell) {
+        cell.backgroundColor = cell.selected ? UIColor.orangeColor() : UIColor.clearColor()
+    }
+    
     func fetchLocation() {
         KBLocationProvider.instance().startFetchLocation { (location, error) -> Void in
             if location != nil {
@@ -126,6 +128,20 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
                 self.lastLocation = location
             }
         }
+    }
+    
+    func resetSelection() {
+        if selectedPhotos.count > 0 {
+            let selectedItems = collectionView?.indexPathsForSelectedItems()
+            for indexPath in selectedItems! {
+                collectionView?.deselectItemAtIndexPath(indexPath, animated: false)
+            }
+        }
+        
+        collectionView?.reloadData()
+        
+        selectedPhotos.removeAll()
+        updateShareState(false)
     }
     
     func fetchPhotos(location : CLLocation) {
@@ -267,7 +283,6 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
             zoomViewController.image = UIImage(data: photo.image!)
         }
         
-        //navigationController?.pushViewController(zoomViewController, animated: true)
         presentViewController(zoomViewController, animated: true, completion: nil)
     }
     
@@ -335,6 +350,8 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
             cell.photo.image = UIImage(data: photo.image!)
         }
         
+        updateCellSelection(cell)
+        
         return cell
     }
     
@@ -342,6 +359,7 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
         if isSharing {
             selectedPhotos.append(photos[indexPath.row])
             updateShareSelection()
+            updateCellSelection(collectionView.cellForItemAtIndexPath(indexPath)!)
         }
         else {
             collectionView.deselectItemAtIndexPath(indexPath, animated: true)
@@ -355,6 +373,7 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
             let selectedPhoto = photos[indexPath.row]
             selectedPhotos.removeAtIndex(selectedPhotos.indexOf(selectedPhoto)!)
             updateShareSelection()
+            updateCellSelection(collectionView.cellForItemAtIndexPath(indexPath)!)
         }
     }
     

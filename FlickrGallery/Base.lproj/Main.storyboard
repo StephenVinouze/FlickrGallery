@@ -29,7 +29,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Eei-s4-ptJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="93" height="92"/>
+                                            <rect key="frame" x="2" y="2" width="89" height="88"/>
                                             <animations/>
                                         </imageView>
                                     </subviews>
@@ -38,12 +38,12 @@
                                 </view>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstItem="Eei-s4-ptJ" firstAttribute="width" secondItem="R7q-Pt-86c" secondAttribute="width" id="IP8-2g-kNv"/>
-                                    <constraint firstItem="Eei-s4-ptJ" firstAttribute="top" secondItem="R7q-Pt-86c" secondAttribute="top" id="Kdn-Zu-Auk"/>
-                                    <constraint firstAttribute="bottom" secondItem="Eei-s4-ptJ" secondAttribute="bottom" id="Xfd-sd-z1N"/>
-                                    <constraint firstItem="Eei-s4-ptJ" firstAttribute="height" secondItem="R7q-Pt-86c" secondAttribute="height" id="c57-on-EMu"/>
-                                    <constraint firstAttribute="trailing" secondItem="Eei-s4-ptJ" secondAttribute="trailing" id="hhS-2L-PsN"/>
-                                    <constraint firstItem="Eei-s4-ptJ" firstAttribute="leading" secondItem="R7q-Pt-86c" secondAttribute="leading" id="mdH-xo-jFt"/>
+                                    <constraint firstItem="Eei-s4-ptJ" firstAttribute="width" secondItem="R7q-Pt-86c" secondAttribute="width" constant="-4" id="IP8-2g-kNv"/>
+                                    <constraint firstItem="Eei-s4-ptJ" firstAttribute="top" secondItem="R7q-Pt-86c" secondAttribute="top" constant="2" id="Kdn-Zu-Auk"/>
+                                    <constraint firstAttribute="bottom" secondItem="Eei-s4-ptJ" secondAttribute="bottom" constant="2" id="Xfd-sd-z1N"/>
+                                    <constraint firstItem="Eei-s4-ptJ" firstAttribute="height" secondItem="R7q-Pt-86c" secondAttribute="height" constant="-4" id="c57-on-EMu"/>
+                                    <constraint firstAttribute="trailing" secondItem="Eei-s4-ptJ" secondAttribute="trailing" constant="2" id="hhS-2L-PsN"/>
+                                    <constraint firstItem="Eei-s4-ptJ" firstAttribute="leading" secondItem="R7q-Pt-86c" secondAttribute="leading" constant="2" id="mdH-xo-jFt"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="photo" destination="Eei-s4-ptJ" id="uLV-Af-czT"/>
