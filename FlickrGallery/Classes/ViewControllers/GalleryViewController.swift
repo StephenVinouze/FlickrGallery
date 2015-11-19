@@ -92,15 +92,17 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
             self.shareBarButton?.title = NSLocalizedString(editState ? "SharePhotos"  : "SelectPhotos", comment: "")
         }
         
-        updateBarTitle()
+        updateShareSelection()
     }
     
-    func updateBarTitle() {
+    func updateShareSelection() {
         var barTitle = NSLocalizedString(isSharing ? "PickPhotos"  : "DisplayPhotos", comment: "")
         let photoCount = selectedPhotos.count
         if photoCount > 0 {
             barTitle += " (" + String(photoCount) + ")"
         }
+        
+        shareBarButton?.enabled = !isSharing || photoCount > 0
         
         navigationItem.title = barTitle
     }
@@ -331,7 +333,7 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if isSharing {
             selectedPhotos.append(photos[indexPath.row])
-            updateBarTitle()
+            updateShareSelection()
         }
         else {
             collectionView.deselectItemAtIndexPath(indexPath, animated: true)
@@ -344,7 +346,7 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
         if isSharing {
             let selectedPhoto = photos[indexPath.row]
             selectedPhotos.removeAtIndex(selectedPhotos.indexOf(selectedPhoto)!)
-            updateBarTitle()
+            updateShareSelection()
         }
     }
     
