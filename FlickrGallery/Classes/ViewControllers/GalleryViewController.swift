@@ -69,6 +69,14 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
             }
             
             let shareScreen = UIActivityViewController(activityItems: selectedImages, applicationActivities: nil)
+            shareScreen.completionWithItemsHandler = {
+                (activityType, completed, returnedItems, activityError) in
+                if completed {
+                    self.selectedPhotos.removeAll()
+                    self.updateShareState(false)
+                }
+            }
+            
             if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
                 let popover = UIPopoverController(contentViewController: shareScreen)
                 popover.presentPopoverFromBarButtonItem(navigationItem.rightBarButtonItems!.first! as UIBarButtonItem,
