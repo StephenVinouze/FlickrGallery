@@ -114,7 +114,7 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
     }
     
     func updateCellSelection(cell: UICollectionViewCell) {
-        cell.backgroundColor = cell.selected ? UIColor.orangeColor() : UIColor.clearColor()
+        cell.backgroundColor = cell.selected ? UIColor.blueColor() : UIColor.clearColor()
     }
     
     func fetchLocation() {
