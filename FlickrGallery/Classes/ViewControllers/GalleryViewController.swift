@@ -56,11 +56,6 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
                 
                 self.lastLocation = location
             }
-            else {
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.showAlertError(error.localizedDescription)
-                })
-            }
         }
     }
     
@@ -89,7 +84,7 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
                     
                     for photoDictionary in photoArray {
                         var download = true
-                        let imageUrl = flickrKit.photoURLForSize(FKPhotoSizeLarge1024, fromPhotoDictionary: photoDictionary)
+                        let imageUrl = flickrKit.photoURLForSize(FKPhotoSizeSmall240, fromPhotoDictionary: photoDictionary)
                         
                         // Prevent downloading image from a known url in the database
                         for photo in self.photos {
@@ -131,7 +126,6 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
                 }
                 else {
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        self.showAlertError(error.localizedDescription)
                         self.finalizeSync()
                     })
                 }
@@ -178,13 +172,6 @@ class GalleryViewController : UICollectionViewController, UICollectionViewDelega
         } catch let error as NSError  {
             print("Could not save photo in database : \(error), \(error.userInfo)")
         }
-    }
-    
-    func showAlertError(message : String) {
-        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     func finalizeSync() {
